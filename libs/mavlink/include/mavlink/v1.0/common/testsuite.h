@@ -7097,7 +7097,7 @@ static void mavlink_test_external_data(uint8_t system_id, uint8_t component_id, 
 {
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
 	mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
-        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_external_data >= 256) {
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_EXTERNAL_DATA >= 256) {
         	return;
         }
 #endif
@@ -7115,7 +7115,7 @@ static void mavlink_test_external_data(uint8_t system_id, uint8_t component_id, 
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
         if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
            // cope with extensions
-           memset(MAVLINK_MSG_ID_external_data_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_external_data_MIN_LEN);
+           memset(MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN);
         }
 #endif
         memset(&packet2, 0, sizeof(packet2));
