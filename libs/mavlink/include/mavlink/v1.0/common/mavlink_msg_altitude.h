@@ -95,7 +95,7 @@ static inline uint16_t mavlink_msg_altitude_pack(uint8_t system_id, uint8_t comp
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_ALTITUDE;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_ALTITUDE_MIN_LEN, MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
 }
 
 /**
@@ -142,7 +142,7 @@ static inline uint16_t mavlink_msg_altitude_pack_chan(uint8_t system_id, uint8_t
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_ALTITUDE;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_ALTITUDE_MIN_LEN, MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
 }
 
 /**
@@ -198,7 +198,7 @@ static inline void mavlink_msg_altitude_send(mavlink_channel_t chan, uint64_t ti
 	_mav_put_float(buf, 24, altitude_terrain);
 	_mav_put_float(buf, 28, bottom_clearance);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, buf,  MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, buf, MAVLINK_MSG_ID_ALTITUDE_MIN_LEN, MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
 #else
 	mavlink_altitude_t packet;
 	packet.time_usec = time_usec;
@@ -209,7 +209,7 @@ static inline void mavlink_msg_altitude_send(mavlink_channel_t chan, uint64_t ti
 	packet.altitude_terrain = altitude_terrain;
 	packet.bottom_clearance = bottom_clearance;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, (const char *)&packet,  MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, (const char *)&packet, MAVLINK_MSG_ID_ALTITUDE_MIN_LEN, MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
 #endif
 }
 
@@ -223,7 +223,7 @@ static inline void mavlink_msg_altitude_send_struct(mavlink_channel_t chan, cons
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_altitude_send(chan, altitude->time_usec, altitude->altitude_monotonic, altitude->altitude_amsl, altitude->altitude_local, altitude->altitude_relative, altitude->altitude_terrain, altitude->bottom_clearance);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, (const char *)altitude,  MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, (const char *)altitude, MAVLINK_MSG_ID_ALTITUDE_MIN_LEN, MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
 #endif
 }
 
@@ -247,7 +247,7 @@ static inline void mavlink_msg_altitude_send_buf(mavlink_message_t *msgbuf, mavl
 	_mav_put_float(buf, 24, altitude_terrain);
 	_mav_put_float(buf, 28, bottom_clearance);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, buf,  MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, buf, MAVLINK_MSG_ID_ALTITUDE_MIN_LEN, MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
 #else
 	mavlink_altitude_t *packet = (mavlink_altitude_t *)msgbuf;
 	packet->time_usec = time_usec;
@@ -258,7 +258,7 @@ static inline void mavlink_msg_altitude_send_buf(mavlink_message_t *msgbuf, mavl
 	packet->altitude_terrain = altitude_terrain;
 	packet->bottom_clearance = bottom_clearance;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, (const char *)packet,  MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_ALTITUDE, (const char *)packet, MAVLINK_MSG_ID_ALTITUDE_MIN_LEN, MAVLINK_MSG_ID_ALTITUDE_LEN, MAVLINK_MSG_ID_ALTITUDE_CRC);
 #endif
 }
 #endif

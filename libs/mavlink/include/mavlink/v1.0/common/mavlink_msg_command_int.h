@@ -131,7 +131,7 @@ static inline uint16_t mavlink_msg_command_int_pack(uint8_t system_id, uint8_t c
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_COMMAND_INT;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
 }
 
 /**
@@ -196,7 +196,7 @@ static inline uint16_t mavlink_msg_command_int_pack_chan(uint8_t system_id, uint
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_COMMAND_INT;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
 }
 
 /**
@@ -264,7 +264,7 @@ static inline void mavlink_msg_command_int_send(mavlink_channel_t chan, uint8_t 
 	_mav_put_uint8_t(buf, 33, current);
 	_mav_put_uint8_t(buf, 34, autocontinue);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, buf,  MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, buf, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
 #else
 	mavlink_command_int_t packet;
 	packet.param1 = param1;
@@ -281,7 +281,7 @@ static inline void mavlink_msg_command_int_send(mavlink_channel_t chan, uint8_t 
 	packet.current = current;
 	packet.autocontinue = autocontinue;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, (const char *)&packet,  MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, (const char *)&packet, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
 #endif
 }
 
@@ -295,7 +295,7 @@ static inline void mavlink_msg_command_int_send_struct(mavlink_channel_t chan, c
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_command_int_send(chan, command_int->target_system, command_int->target_component, command_int->frame, command_int->command, command_int->current, command_int->autocontinue, command_int->param1, command_int->param2, command_int->param3, command_int->param4, command_int->x, command_int->y, command_int->z);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, (const char *)command_int,  MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, (const char *)command_int, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
 #endif
 }
 
@@ -325,7 +325,7 @@ static inline void mavlink_msg_command_int_send_buf(mavlink_message_t *msgbuf, m
 	_mav_put_uint8_t(buf, 33, current);
 	_mav_put_uint8_t(buf, 34, autocontinue);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, buf,  MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, buf, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
 #else
 	mavlink_command_int_t *packet = (mavlink_command_int_t *)msgbuf;
 	packet->param1 = param1;
@@ -342,7 +342,7 @@ static inline void mavlink_msg_command_int_send_buf(mavlink_message_t *msgbuf, m
 	packet->current = current;
 	packet->autocontinue = autocontinue;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, (const char *)packet,  MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COMMAND_INT, (const char *)packet, MAVLINK_MSG_ID_COMMAND_INT_MIN_LEN, MAVLINK_MSG_ID_COMMAND_INT_LEN, MAVLINK_MSG_ID_COMMAND_INT_CRC);
 #endif
 }
 #endif

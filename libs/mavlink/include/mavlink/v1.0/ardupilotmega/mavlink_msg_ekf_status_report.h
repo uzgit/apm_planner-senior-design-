@@ -74,9 +74,9 @@ static inline uint16_t mavlink_msg_ekf_status_report_pack(uint8_t system_id, uin
 
 	msg->msgid = MAVLINK_MSG_ID_EKF_STATUS_REPORT;
 #if MAVLINK_CRC_EXTRA
-    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN, MAVLINK_MSG_ID_EKF_STATUS_REPORT_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, 0, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN, MAVLINK_MSG_ID_EKF_STATUS_REPORT_CRC);
 #else
-    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN);
+    return mavlink_finalize_message(msg, system_id, component_id, 0, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN);
 #endif
 }
 
@@ -122,9 +122,9 @@ static inline uint16_t mavlink_msg_ekf_status_report_pack_chan(uint8_t system_id
 
 	msg->msgid = MAVLINK_MSG_ID_EKF_STATUS_REPORT;
 #if MAVLINK_CRC_EXTRA
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN, MAVLINK_MSG_ID_EKF_STATUS_REPORT_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, 0, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN, MAVLINK_MSG_ID_EKF_STATUS_REPORT_CRC);
 #else
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, 0, MAVLINK_MSG_ID_EKF_STATUS_REPORT_LEN);
 #endif
 }
 

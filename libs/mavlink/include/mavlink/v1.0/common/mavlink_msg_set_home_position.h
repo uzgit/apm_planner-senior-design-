@@ -117,7 +117,7 @@ static inline uint16_t mavlink_msg_set_home_position_pack(uint8_t system_id, uin
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_SET_HOME_POSITION;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
 }
 
 /**
@@ -174,7 +174,7 @@ static inline uint16_t mavlink_msg_set_home_position_pack_chan(uint8_t system_id
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_SET_HOME_POSITION;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
 }
 
 /**
@@ -237,7 +237,7 @@ static inline void mavlink_msg_set_home_position_send(mavlink_channel_t chan, ui
 	_mav_put_float(buf, 48, approach_z);
 	_mav_put_uint8_t(buf, 52, target_system);
 	_mav_put_float_array(buf, 24, q, 4);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, buf,  MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, buf, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
 #else
 	mavlink_set_home_position_t packet;
 	packet.latitude = latitude;
@@ -251,7 +251,7 @@ static inline void mavlink_msg_set_home_position_send(mavlink_channel_t chan, ui
 	packet.approach_z = approach_z;
 	packet.target_system = target_system;
 	mav_array_memcpy(packet.q, q, sizeof(float)*4);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, (const char *)&packet,  MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, (const char *)&packet, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
 #endif
 }
 
@@ -265,7 +265,7 @@ static inline void mavlink_msg_set_home_position_send_struct(mavlink_channel_t c
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_set_home_position_send(chan, set_home_position->target_system, set_home_position->latitude, set_home_position->longitude, set_home_position->altitude, set_home_position->x, set_home_position->y, set_home_position->z, set_home_position->q, set_home_position->approach_x, set_home_position->approach_y, set_home_position->approach_z);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, (const char *)set_home_position,  MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, (const char *)set_home_position, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
 #endif
 }
 
@@ -292,7 +292,7 @@ static inline void mavlink_msg_set_home_position_send_buf(mavlink_message_t *msg
 	_mav_put_float(buf, 48, approach_z);
 	_mav_put_uint8_t(buf, 52, target_system);
 	_mav_put_float_array(buf, 24, q, 4);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, buf,  MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, buf, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
 #else
 	mavlink_set_home_position_t *packet = (mavlink_set_home_position_t *)msgbuf;
 	packet->latitude = latitude;
@@ -306,7 +306,7 @@ static inline void mavlink_msg_set_home_position_send_buf(mavlink_message_t *msg
 	packet->approach_z = approach_z;
 	packet->target_system = target_system;
 	mav_array_memcpy(packet->q, q, sizeof(float)*4);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, (const char *)packet,  MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_SET_HOME_POSITION, (const char *)packet, MAVLINK_MSG_ID_SET_HOME_POSITION_MIN_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN, MAVLINK_MSG_ID_SET_HOME_POSITION_CRC);
 #endif
 }
 #endif

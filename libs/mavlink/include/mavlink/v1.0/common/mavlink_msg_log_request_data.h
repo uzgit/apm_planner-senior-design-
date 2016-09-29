@@ -83,7 +83,7 @@ static inline uint16_t mavlink_msg_log_request_data_pack(uint8_t system_id, uint
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_LOG_REQUEST_DATA;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
 }
 
 /**
@@ -124,7 +124,7 @@ static inline uint16_t mavlink_msg_log_request_data_pack_chan(uint8_t system_id,
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_LOG_REQUEST_DATA;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
 }
 
 /**
@@ -176,7 +176,7 @@ static inline void mavlink_msg_log_request_data_send(mavlink_channel_t chan, uin
 	_mav_put_uint8_t(buf, 10, target_system);
 	_mav_put_uint8_t(buf, 11, target_component);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, buf,  MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, buf, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
 #else
 	mavlink_log_request_data_t packet;
 	packet.ofs = ofs;
@@ -185,7 +185,7 @@ static inline void mavlink_msg_log_request_data_send(mavlink_channel_t chan, uin
 	packet.target_system = target_system;
 	packet.target_component = target_component;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, (const char *)&packet,  MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, (const char *)&packet, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
 #endif
 }
 
@@ -199,7 +199,7 @@ static inline void mavlink_msg_log_request_data_send_struct(mavlink_channel_t ch
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_log_request_data_send(chan, log_request_data->target_system, log_request_data->target_component, log_request_data->id, log_request_data->ofs, log_request_data->count);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, (const char *)log_request_data,  MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, (const char *)log_request_data, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
 #endif
 }
 
@@ -221,7 +221,7 @@ static inline void mavlink_msg_log_request_data_send_buf(mavlink_message_t *msgb
 	_mav_put_uint8_t(buf, 10, target_system);
 	_mav_put_uint8_t(buf, 11, target_component);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, buf,  MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, buf, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
 #else
 	mavlink_log_request_data_t *packet = (mavlink_log_request_data_t *)msgbuf;
 	packet->ofs = ofs;
@@ -230,7 +230,7 @@ static inline void mavlink_msg_log_request_data_send_buf(mavlink_message_t *msgb
 	packet->target_system = target_system;
 	packet->target_component = target_component;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, (const char *)packet,  MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_REQUEST_DATA, (const char *)packet, MAVLINK_MSG_ID_LOG_REQUEST_DATA_MIN_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_LEN, MAVLINK_MSG_ID_LOG_REQUEST_DATA_CRC);
 #endif
 }
 #endif

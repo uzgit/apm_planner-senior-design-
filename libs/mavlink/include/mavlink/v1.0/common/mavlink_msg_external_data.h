@@ -59,7 +59,7 @@ static inline uint16_t mavlink_msg_external_data_pack(uint8_t system_id, uint8_t
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_EXTERNAL_DATA;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 }
 
 /**
@@ -88,7 +88,7 @@ static inline uint16_t mavlink_msg_external_data_pack_chan(uint8_t system_id, ui
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_EXTERNAL_DATA;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 }
 
 /**
@@ -132,12 +132,12 @@ static inline void mavlink_msg_external_data_send(mavlink_channel_t chan, float 
 	char buf[MAVLINK_MSG_ID_EXTERNAL_DATA_LEN];
 	_mav_put_float(buf, 0, test_variable);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, buf,  MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, buf, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #else
 	mavlink_external_data_t packet;
 	packet.test_variable = test_variable;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, (const char *)&packet,  MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, (const char *)&packet, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #endif
 }
 
@@ -151,7 +151,7 @@ static inline void mavlink_msg_external_data_send_struct(mavlink_channel_t chan,
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_external_data_send(chan, external_data->test_variable);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, (const char *)external_data,  MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, (const char *)external_data, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #endif
 }
 
@@ -169,12 +169,12 @@ static inline void mavlink_msg_external_data_send_buf(mavlink_message_t *msgbuf,
 	char *buf = (char *)msgbuf;
 	_mav_put_float(buf, 0, test_variable);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, buf,  MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, buf, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #else
 	mavlink_external_data_t *packet = (mavlink_external_data_t *)msgbuf;
 	packet->test_variable = test_variable;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, (const char *)packet,  MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, (const char *)packet, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #endif
 }
 #endif

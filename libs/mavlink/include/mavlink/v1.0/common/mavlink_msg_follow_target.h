@@ -121,7 +121,7 @@ static inline uint16_t mavlink_msg_follow_target_pack(uint8_t system_id, uint8_t
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_FOLLOW_TARGET;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_FOLLOW_TARGET_MIN_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
 }
 
 /**
@@ -178,7 +178,7 @@ static inline uint16_t mavlink_msg_follow_target_pack_chan(uint8_t system_id, ui
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_FOLLOW_TARGET;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_FOLLOW_TARGET_MIN_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
 }
 
 /**
@@ -241,7 +241,7 @@ static inline void mavlink_msg_follow_target_send(mavlink_channel_t chan, uint64
 	_mav_put_float_array(buf, 52, attitude_q, 4);
 	_mav_put_float_array(buf, 68, rates, 3);
 	_mav_put_float_array(buf, 80, position_cov, 3);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, buf,  MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, buf, MAVLINK_MSG_ID_FOLLOW_TARGET_MIN_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
 #else
 	mavlink_follow_target_t packet;
 	packet.timestamp = timestamp;
@@ -255,7 +255,7 @@ static inline void mavlink_msg_follow_target_send(mavlink_channel_t chan, uint64
 	mav_array_memcpy(packet.attitude_q, attitude_q, sizeof(float)*4);
 	mav_array_memcpy(packet.rates, rates, sizeof(float)*3);
 	mav_array_memcpy(packet.position_cov, position_cov, sizeof(float)*3);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, (const char *)&packet,  MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, (const char *)&packet, MAVLINK_MSG_ID_FOLLOW_TARGET_MIN_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
 #endif
 }
 
@@ -269,7 +269,7 @@ static inline void mavlink_msg_follow_target_send_struct(mavlink_channel_t chan,
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_follow_target_send(chan, follow_target->timestamp, follow_target->est_capabilities, follow_target->lat, follow_target->lon, follow_target->alt, follow_target->vel, follow_target->acc, follow_target->attitude_q, follow_target->rates, follow_target->position_cov, follow_target->custom_state);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, (const char *)follow_target,  MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, (const char *)follow_target, MAVLINK_MSG_ID_FOLLOW_TARGET_MIN_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
 #endif
 }
 
@@ -296,7 +296,7 @@ static inline void mavlink_msg_follow_target_send_buf(mavlink_message_t *msgbuf,
 	_mav_put_float_array(buf, 52, attitude_q, 4);
 	_mav_put_float_array(buf, 68, rates, 3);
 	_mav_put_float_array(buf, 80, position_cov, 3);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, buf,  MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, buf, MAVLINK_MSG_ID_FOLLOW_TARGET_MIN_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
 #else
 	mavlink_follow_target_t *packet = (mavlink_follow_target_t *)msgbuf;
 	packet->timestamp = timestamp;
@@ -310,7 +310,7 @@ static inline void mavlink_msg_follow_target_send_buf(mavlink_message_t *msgbuf,
 	mav_array_memcpy(packet->attitude_q, attitude_q, sizeof(float)*4);
 	mav_array_memcpy(packet->rates, rates, sizeof(float)*3);
 	mav_array_memcpy(packet->position_cov, position_cov, sizeof(float)*3);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, (const char *)packet,  MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_FOLLOW_TARGET, (const char *)packet, MAVLINK_MSG_ID_FOLLOW_TARGET_MIN_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_LEN, MAVLINK_MSG_ID_FOLLOW_TARGET_CRC);
 #endif
 }
 #endif

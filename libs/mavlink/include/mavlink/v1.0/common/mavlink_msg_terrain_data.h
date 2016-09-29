@@ -81,7 +81,7 @@ static inline uint16_t mavlink_msg_terrain_data_pack(uint8_t system_id, uint8_t 
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_TERRAIN_DATA;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_TERRAIN_DATA_MIN_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
 }
 
 /**
@@ -120,7 +120,7 @@ static inline uint16_t mavlink_msg_terrain_data_pack_chan(uint8_t system_id, uin
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_TERRAIN_DATA;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_TERRAIN_DATA_MIN_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
 }
 
 /**
@@ -171,7 +171,7 @@ static inline void mavlink_msg_terrain_data_send(mavlink_channel_t chan, int32_t
 	_mav_put_uint16_t(buf, 8, grid_spacing);
 	_mav_put_uint8_t(buf, 42, gridbit);
 	_mav_put_int16_t_array(buf, 10, data, 16);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, buf,  MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, buf, MAVLINK_MSG_ID_TERRAIN_DATA_MIN_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
 #else
 	mavlink_terrain_data_t packet;
 	packet.lat = lat;
@@ -179,7 +179,7 @@ static inline void mavlink_msg_terrain_data_send(mavlink_channel_t chan, int32_t
 	packet.grid_spacing = grid_spacing;
 	packet.gridbit = gridbit;
 	mav_array_memcpy(packet.data, data, sizeof(int16_t)*16);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, (const char *)&packet,  MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, (const char *)&packet, MAVLINK_MSG_ID_TERRAIN_DATA_MIN_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
 #endif
 }
 
@@ -193,7 +193,7 @@ static inline void mavlink_msg_terrain_data_send_struct(mavlink_channel_t chan, 
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_terrain_data_send(chan, terrain_data->lat, terrain_data->lon, terrain_data->grid_spacing, terrain_data->gridbit, terrain_data->data);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, (const char *)terrain_data,  MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, (const char *)terrain_data, MAVLINK_MSG_ID_TERRAIN_DATA_MIN_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
 #endif
 }
 
@@ -214,7 +214,7 @@ static inline void mavlink_msg_terrain_data_send_buf(mavlink_message_t *msgbuf, 
 	_mav_put_uint16_t(buf, 8, grid_spacing);
 	_mav_put_uint8_t(buf, 42, gridbit);
 	_mav_put_int16_t_array(buf, 10, data, 16);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, buf,  MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, buf, MAVLINK_MSG_ID_TERRAIN_DATA_MIN_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
 #else
 	mavlink_terrain_data_t *packet = (mavlink_terrain_data_t *)msgbuf;
 	packet->lat = lat;
@@ -222,7 +222,7 @@ static inline void mavlink_msg_terrain_data_send_buf(mavlink_message_t *msgbuf, 
 	packet->grid_spacing = grid_spacing;
 	packet->gridbit = gridbit;
 	mav_array_memcpy(packet->data, data, sizeof(int16_t)*16);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, (const char *)packet,  MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TERRAIN_DATA, (const char *)packet, MAVLINK_MSG_ID_TERRAIN_DATA_MIN_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_LEN, MAVLINK_MSG_ID_TERRAIN_DATA_CRC);
 #endif
 }
 #endif

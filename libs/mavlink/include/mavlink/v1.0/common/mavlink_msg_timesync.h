@@ -65,7 +65,7 @@ static inline uint16_t mavlink_msg_timesync_pack(uint8_t system_id, uint8_t comp
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_TIMESYNC;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_TIMESYNC_MIN_LEN, MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
 }
 
 /**
@@ -97,7 +97,7 @@ static inline uint16_t mavlink_msg_timesync_pack_chan(uint8_t system_id, uint8_t
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_TIMESYNC;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_TIMESYNC_MIN_LEN, MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
 }
 
 /**
@@ -143,13 +143,13 @@ static inline void mavlink_msg_timesync_send(mavlink_channel_t chan, int64_t tc1
 	_mav_put_int64_t(buf, 0, tc1);
 	_mav_put_int64_t(buf, 8, ts1);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, buf,  MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, buf, MAVLINK_MSG_ID_TIMESYNC_MIN_LEN, MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
 #else
 	mavlink_timesync_t packet;
 	packet.tc1 = tc1;
 	packet.ts1 = ts1;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, (const char *)&packet,  MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, (const char *)&packet, MAVLINK_MSG_ID_TIMESYNC_MIN_LEN, MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
 #endif
 }
 
@@ -163,7 +163,7 @@ static inline void mavlink_msg_timesync_send_struct(mavlink_channel_t chan, cons
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_timesync_send(chan, timesync->tc1, timesync->ts1);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, (const char *)timesync,  MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, (const char *)timesync, MAVLINK_MSG_ID_TIMESYNC_MIN_LEN, MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
 #endif
 }
 
@@ -182,13 +182,13 @@ static inline void mavlink_msg_timesync_send_buf(mavlink_message_t *msgbuf, mavl
 	_mav_put_int64_t(buf, 0, tc1);
 	_mav_put_int64_t(buf, 8, ts1);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, buf,  MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, buf, MAVLINK_MSG_ID_TIMESYNC_MIN_LEN, MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
 #else
 	mavlink_timesync_t *packet = (mavlink_timesync_t *)msgbuf;
 	packet->tc1 = tc1;
 	packet->ts1 = ts1;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, (const char *)packet,  MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_TIMESYNC, (const char *)packet, MAVLINK_MSG_ID_TIMESYNC_MIN_LEN, MAVLINK_MSG_ID_TIMESYNC_LEN, MAVLINK_MSG_ID_TIMESYNC_CRC);
 #endif
 }
 #endif

@@ -1,6 +1,6 @@
 /** @file
- *	@brief MAVLink comm protocol built from pixhawk.xml
- *	@see http://pixhawk.ethz.ch/software/mavlink
+ *	@brief MAVLink comm protocol built from uAvionix.xml
+ *	@see http://mavlink.org
  */
 #ifndef MAVLINK_H
 #define MAVLINK_H
@@ -21,7 +21,11 @@
 #define MAVLINK_CRC_EXTRA 1
 #endif
 
+#ifndef MAVLINK_COMMAND_24BIT
+#define MAVLINK_COMMAND_24BIT 0
+#endif
+
 #include "version.h"
-#include "pixhawk.h"
+#include "uAvionix.h"
 
 #endif // MAVLINK_H

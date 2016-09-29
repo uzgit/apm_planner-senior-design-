@@ -95,7 +95,7 @@ static inline uint16_t mavlink_msg_collision_pack(uint8_t system_id, uint8_t com
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_COLLISION;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_COLLISION_MIN_LEN, MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
 }
 
 /**
@@ -142,7 +142,7 @@ static inline uint16_t mavlink_msg_collision_pack_chan(uint8_t system_id, uint8_
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_COLLISION;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_COLLISION_MIN_LEN, MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
 }
 
 /**
@@ -198,7 +198,7 @@ static inline void mavlink_msg_collision_send(mavlink_channel_t chan, uint8_t sr
 	_mav_put_uint8_t(buf, 17, action);
 	_mav_put_uint8_t(buf, 18, threat_level);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, buf,  MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, buf, MAVLINK_MSG_ID_COLLISION_MIN_LEN, MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
 #else
 	mavlink_collision_t packet;
 	packet.id = id;
@@ -209,7 +209,7 @@ static inline void mavlink_msg_collision_send(mavlink_channel_t chan, uint8_t sr
 	packet.action = action;
 	packet.threat_level = threat_level;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, (const char *)&packet,  MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, (const char *)&packet, MAVLINK_MSG_ID_COLLISION_MIN_LEN, MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
 #endif
 }
 
@@ -223,7 +223,7 @@ static inline void mavlink_msg_collision_send_struct(mavlink_channel_t chan, con
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_collision_send(chan, collision->src, collision->id, collision->action, collision->threat_level, collision->time_to_minimum_delta, collision->altitude_minimum_delta, collision->horizontal_minimum_delta);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, (const char *)collision,  MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, (const char *)collision, MAVLINK_MSG_ID_COLLISION_MIN_LEN, MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
 #endif
 }
 
@@ -247,7 +247,7 @@ static inline void mavlink_msg_collision_send_buf(mavlink_message_t *msgbuf, mav
 	_mav_put_uint8_t(buf, 17, action);
 	_mav_put_uint8_t(buf, 18, threat_level);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, buf,  MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, buf, MAVLINK_MSG_ID_COLLISION_MIN_LEN, MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
 #else
 	mavlink_collision_t *packet = (mavlink_collision_t *)msgbuf;
 	packet->id = id;
@@ -258,7 +258,7 @@ static inline void mavlink_msg_collision_send_buf(mavlink_message_t *msgbuf, mav
 	packet->action = action;
 	packet->threat_level = threat_level;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, (const char *)packet,  MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_COLLISION, (const char *)packet, MAVLINK_MSG_ID_COLLISION_MIN_LEN, MAVLINK_MSG_ID_COLLISION_LEN, MAVLINK_MSG_ID_COLLISION_CRC);
 #endif
 }
 #endif

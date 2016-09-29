@@ -83,7 +83,7 @@ static inline uint16_t mavlink_msg_log_entry_pack(uint8_t system_id, uint8_t com
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_LOG_ENTRY;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_LOG_ENTRY_MIN_LEN, MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
 }
 
 /**
@@ -124,7 +124,7 @@ static inline uint16_t mavlink_msg_log_entry_pack_chan(uint8_t system_id, uint8_
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_LOG_ENTRY;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_LOG_ENTRY_MIN_LEN, MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
 }
 
 /**
@@ -176,7 +176,7 @@ static inline void mavlink_msg_log_entry_send(mavlink_channel_t chan, uint16_t i
 	_mav_put_uint16_t(buf, 10, num_logs);
 	_mav_put_uint16_t(buf, 12, last_log_num);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, buf,  MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, buf, MAVLINK_MSG_ID_LOG_ENTRY_MIN_LEN, MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
 #else
 	mavlink_log_entry_t packet;
 	packet.time_utc = time_utc;
@@ -185,7 +185,7 @@ static inline void mavlink_msg_log_entry_send(mavlink_channel_t chan, uint16_t i
 	packet.num_logs = num_logs;
 	packet.last_log_num = last_log_num;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, (const char *)&packet,  MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, (const char *)&packet, MAVLINK_MSG_ID_LOG_ENTRY_MIN_LEN, MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
 #endif
 }
 
@@ -199,7 +199,7 @@ static inline void mavlink_msg_log_entry_send_struct(mavlink_channel_t chan, con
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_log_entry_send(chan, log_entry->id, log_entry->num_logs, log_entry->last_log_num, log_entry->time_utc, log_entry->size);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, (const char *)log_entry,  MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, (const char *)log_entry, MAVLINK_MSG_ID_LOG_ENTRY_MIN_LEN, MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
 #endif
 }
 
@@ -221,7 +221,7 @@ static inline void mavlink_msg_log_entry_send_buf(mavlink_message_t *msgbuf, mav
 	_mav_put_uint16_t(buf, 10, num_logs);
 	_mav_put_uint16_t(buf, 12, last_log_num);
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, buf,  MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, buf, MAVLINK_MSG_ID_LOG_ENTRY_MIN_LEN, MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
 #else
 	mavlink_log_entry_t *packet = (mavlink_log_entry_t *)msgbuf;
 	packet->time_utc = time_utc;
@@ -230,7 +230,7 @@ static inline void mavlink_msg_log_entry_send_buf(mavlink_message_t *msgbuf, mav
 	packet->num_logs = num_logs;
 	packet->last_log_num = last_log_num;
 
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, (const char *)packet,  MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_LOG_ENTRY, (const char *)packet, MAVLINK_MSG_ID_LOG_ENTRY_MIN_LEN, MAVLINK_MSG_ID_LOG_ENTRY_LEN, MAVLINK_MSG_ID_LOG_ENTRY_CRC);
 #endif
 }
 #endif

@@ -155,7 +155,7 @@ static inline uint16_t mavlink_msg_control_system_state_pack(uint8_t system_id, 
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_MIN_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
 }
 
 /**
@@ -230,7 +230,7 @@ static inline uint16_t mavlink_msg_control_system_state_pack_chan(uint8_t system
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_MIN_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
 }
 
 /**
@@ -305,7 +305,7 @@ static inline void mavlink_msg_control_system_state_send(mavlink_channel_t chan,
 	_mav_put_float_array(buf, 48, vel_variance, 3);
 	_mav_put_float_array(buf, 60, pos_variance, 3);
 	_mav_put_float_array(buf, 72, q, 4);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, buf,  MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, buf, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_MIN_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
 #else
 	mavlink_control_system_state_t packet;
 	packet.time_usec = time_usec;
@@ -325,7 +325,7 @@ static inline void mavlink_msg_control_system_state_send(mavlink_channel_t chan,
 	mav_array_memcpy(packet.vel_variance, vel_variance, sizeof(float)*3);
 	mav_array_memcpy(packet.pos_variance, pos_variance, sizeof(float)*3);
 	mav_array_memcpy(packet.q, q, sizeof(float)*4);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, (const char *)&packet,  MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, (const char *)&packet, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_MIN_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
 #endif
 }
 
@@ -339,7 +339,7 @@ static inline void mavlink_msg_control_system_state_send_struct(mavlink_channel_
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_control_system_state_send(chan, control_system_state->time_usec, control_system_state->x_acc, control_system_state->y_acc, control_system_state->z_acc, control_system_state->x_vel, control_system_state->y_vel, control_system_state->z_vel, control_system_state->x_pos, control_system_state->y_pos, control_system_state->z_pos, control_system_state->airspeed, control_system_state->vel_variance, control_system_state->pos_variance, control_system_state->q, control_system_state->roll_rate, control_system_state->pitch_rate, control_system_state->yaw_rate);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, (const char *)control_system_state,  MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, (const char *)control_system_state, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_MIN_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
 #endif
 }
 
@@ -372,7 +372,7 @@ static inline void mavlink_msg_control_system_state_send_buf(mavlink_message_t *
 	_mav_put_float_array(buf, 48, vel_variance, 3);
 	_mav_put_float_array(buf, 60, pos_variance, 3);
 	_mav_put_float_array(buf, 72, q, 4);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, buf,  MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, buf, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_MIN_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
 #else
 	mavlink_control_system_state_t *packet = (mavlink_control_system_state_t *)msgbuf;
 	packet->time_usec = time_usec;
@@ -392,7 +392,7 @@ static inline void mavlink_msg_control_system_state_send_buf(mavlink_message_t *
 	mav_array_memcpy(packet->vel_variance, vel_variance, sizeof(float)*3);
 	mav_array_memcpy(packet->pos_variance, pos_variance, sizeof(float)*3);
 	mav_array_memcpy(packet->q, q, sizeof(float)*4);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, (const char *)packet,  MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE, (const char *)packet, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_MIN_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_LEN, MAVLINK_MSG_ID_CONTROL_SYSTEM_STATE_CRC);
 #endif
 }
 #endif

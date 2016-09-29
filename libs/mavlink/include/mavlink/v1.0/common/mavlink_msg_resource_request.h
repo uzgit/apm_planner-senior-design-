@@ -82,7 +82,7 @@ static inline uint16_t mavlink_msg_resource_request_pack(uint8_t system_id, uint
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_RESOURCE_REQUEST;
-    return mavlink_finalize_message(msg, system_id, component_id,  MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
+    return mavlink_finalize_message(msg, system_id, component_id, MAVLINK_MSG_ID_RESOURCE_REQUEST_MIN_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
 }
 
 /**
@@ -121,7 +121,7 @@ static inline uint16_t mavlink_msg_resource_request_pack_chan(uint8_t system_id,
 #endif
 
 	msg->msgid = MAVLINK_MSG_ID_RESOURCE_REQUEST;
-    return mavlink_finalize_message_chan(msg, system_id, component_id, chan,  MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
+    return mavlink_finalize_message_chan(msg, system_id, component_id, chan, MAVLINK_MSG_ID_RESOURCE_REQUEST_MIN_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
 }
 
 /**
@@ -172,7 +172,7 @@ static inline void mavlink_msg_resource_request_send(mavlink_channel_t chan, uin
 	_mav_put_uint8_t(buf, 122, transfer_type);
 	_mav_put_uint8_t_array(buf, 2, uri, 120);
 	_mav_put_uint8_t_array(buf, 123, storage, 120);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, buf,  MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, buf, MAVLINK_MSG_ID_RESOURCE_REQUEST_MIN_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
 #else
 	mavlink_resource_request_t packet;
 	packet.request_id = request_id;
@@ -180,7 +180,7 @@ static inline void mavlink_msg_resource_request_send(mavlink_channel_t chan, uin
 	packet.transfer_type = transfer_type;
 	mav_array_memcpy(packet.uri, uri, sizeof(uint8_t)*120);
 	mav_array_memcpy(packet.storage, storage, sizeof(uint8_t)*120);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, (const char *)&packet,  MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, (const char *)&packet, MAVLINK_MSG_ID_RESOURCE_REQUEST_MIN_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
 #endif
 }
 
@@ -194,7 +194,7 @@ static inline void mavlink_msg_resource_request_send_struct(mavlink_channel_t ch
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     mavlink_msg_resource_request_send(chan, resource_request->request_id, resource_request->uri_type, resource_request->uri, resource_request->transfer_type, resource_request->storage);
 #else
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, (const char *)resource_request,  MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, (const char *)resource_request, MAVLINK_MSG_ID_RESOURCE_REQUEST_MIN_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
 #endif
 }
 
@@ -215,7 +215,7 @@ static inline void mavlink_msg_resource_request_send_buf(mavlink_message_t *msgb
 	_mav_put_uint8_t(buf, 122, transfer_type);
 	_mav_put_uint8_t_array(buf, 2, uri, 120);
 	_mav_put_uint8_t_array(buf, 123, storage, 120);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, buf,  MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, buf, MAVLINK_MSG_ID_RESOURCE_REQUEST_MIN_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
 #else
 	mavlink_resource_request_t *packet = (mavlink_resource_request_t *)msgbuf;
 	packet->request_id = request_id;
@@ -223,7 +223,7 @@ static inline void mavlink_msg_resource_request_send_buf(mavlink_message_t *msgb
 	packet->transfer_type = transfer_type;
 	mav_array_memcpy(packet->uri, uri, sizeof(uint8_t)*120);
 	mav_array_memcpy(packet->storage, storage, sizeof(uint8_t)*120);
-    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, (const char *)packet,  MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
+    _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_RESOURCE_REQUEST, (const char *)packet, MAVLINK_MSG_ID_RESOURCE_REQUEST_MIN_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_LEN, MAVLINK_MSG_ID_RESOURCE_REQUEST_CRC);
 #endif
 }
 #endif
