@@ -8176,7 +8176,7 @@ static void mavlink_test_external_data(uint8_t system_id, uint8_t component_id, 
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
 	mavlink_external_data_t packet_in = {
-		17.0,45.0,73.0,101.0,129.0,963498504
+		17.0,45.0,73.0,101.0,129.0,963498504,185.0,213.0,241.0
     };
 	mavlink_external_data_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -8186,6 +8186,9 @@ static void mavlink_test_external_data(uint8_t system_id, uint8_t component_id, 
         packet1.water_temperature = packet_in.water_temperature;
         packet1.humidity = packet_in.humidity;
         packet1.battery_status = packet_in.battery_status;
+        packet1.latitude = packet_in.latitude;
+        packet1.longitude = packet_in.longitude;
+        packet1.altitude = packet_in.altitude;
         
         
 #ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
@@ -8200,12 +8203,12 @@ static void mavlink_test_external_data(uint8_t system_id, uint8_t component_id, 
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_external_data_pack(system_id, component_id, &msg , packet1.voltage , packet1.current , packet1.air_temperature , packet1.water_temperature , packet1.humidity , packet1.battery_status );
+	mavlink_msg_external_data_pack(system_id, component_id, &msg , packet1.voltage , packet1.current , packet1.air_temperature , packet1.water_temperature , packet1.humidity , packet1.battery_status , packet1.latitude , packet1.longitude , packet1.altitude );
 	mavlink_msg_external_data_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_external_data_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.voltage , packet1.current , packet1.air_temperature , packet1.water_temperature , packet1.humidity , packet1.battery_status );
+	mavlink_msg_external_data_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.voltage , packet1.current , packet1.air_temperature , packet1.water_temperature , packet1.humidity , packet1.battery_status , packet1.latitude , packet1.longitude , packet1.altitude );
 	mavlink_msg_external_data_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -8218,7 +8221,7 @@ static void mavlink_test_external_data(uint8_t system_id, uint8_t component_id, 
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-	mavlink_msg_external_data_send(MAVLINK_COMM_1 , packet1.voltage , packet1.current , packet1.air_temperature , packet1.water_temperature , packet1.humidity , packet1.battery_status );
+	mavlink_msg_external_data_send(MAVLINK_COMM_1 , packet1.voltage , packet1.current , packet1.air_temperature , packet1.water_temperature , packet1.humidity , packet1.battery_status , packet1.latitude , packet1.longitude , packet1.altitude );
 	mavlink_msg_external_data_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }

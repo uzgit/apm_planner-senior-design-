@@ -10,15 +10,18 @@ typedef struct __mavlink_external_data_t {
  float water_temperature; /*< Water temperature in celsius.*/
  float humidity; /*< Percentage of humidity in air.*/
  uint32_t battery_status; /*< Which battery is used. (1 or 2)*/
+ float latitude; /*< Latitude of the microprocessor when the data was received.*/
+ float longitude; /*< Longitude of the microprocessor when the data was received.*/
+ float altitude; /*< Altitude of the microprocessor when the data was received.*/
 }) mavlink_external_data_t;
 
-#define MAVLINK_MSG_ID_EXTERNAL_DATA_LEN 24
-#define MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN 24
-#define MAVLINK_MSG_ID_227_LEN 24
-#define MAVLINK_MSG_ID_227_MIN_LEN 24
+#define MAVLINK_MSG_ID_EXTERNAL_DATA_LEN 36
+#define MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN 36
+#define MAVLINK_MSG_ID_227_LEN 36
+#define MAVLINK_MSG_ID_227_MIN_LEN 36
 
-#define MAVLINK_MSG_ID_EXTERNAL_DATA_CRC 140
-#define MAVLINK_MSG_ID_227_CRC 140
+#define MAVLINK_MSG_ID_EXTERNAL_DATA_CRC 68
+#define MAVLINK_MSG_ID_227_CRC 68
 
 
 
@@ -26,25 +29,31 @@ typedef struct __mavlink_external_data_t {
 #define MAVLINK_MESSAGE_INFO_EXTERNAL_DATA { \
 	227, \
 	"EXTERNAL_DATA", \
-	6, \
+	9, \
 	{  { "voltage", NULL, MAVLINK_TYPE_FLOAT, 0, 0, offsetof(mavlink_external_data_t, voltage) }, \
          { "current", NULL, MAVLINK_TYPE_FLOAT, 0, 4, offsetof(mavlink_external_data_t, current) }, \
          { "air_temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_external_data_t, air_temperature) }, \
          { "water_temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_external_data_t, water_temperature) }, \
          { "humidity", NULL, MAVLINK_TYPE_FLOAT, 0, 16, offsetof(mavlink_external_data_t, humidity) }, \
          { "battery_status", NULL, MAVLINK_TYPE_UINT32_T, 0, 20, offsetof(mavlink_external_data_t, battery_status) }, \
+         { "latitude", NULL, MAVLINK_TYPE_FLOAT, 0, 24, offsetof(mavlink_external_data_t, latitude) }, \
+         { "longitude", NULL, MAVLINK_TYPE_FLOAT, 0, 28, offsetof(mavlink_external_data_t, longitude) }, \
+         { "altitude", NULL, MAVLINK_TYPE_FLOAT, 0, 32, offsetof(mavlink_external_data_t, altitude) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_EXTERNAL_DATA { \
 	"EXTERNAL_DATA", \
-	6, \
+	9, \
 	{  { "voltage", NULL, MAVLINK_TYPE_FLOAT, 0, 0, offsetof(mavlink_external_data_t, voltage) }, \
          { "current", NULL, MAVLINK_TYPE_FLOAT, 0, 4, offsetof(mavlink_external_data_t, current) }, \
          { "air_temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_external_data_t, air_temperature) }, \
          { "water_temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_external_data_t, water_temperature) }, \
          { "humidity", NULL, MAVLINK_TYPE_FLOAT, 0, 16, offsetof(mavlink_external_data_t, humidity) }, \
          { "battery_status", NULL, MAVLINK_TYPE_UINT32_T, 0, 20, offsetof(mavlink_external_data_t, battery_status) }, \
+         { "latitude", NULL, MAVLINK_TYPE_FLOAT, 0, 24, offsetof(mavlink_external_data_t, latitude) }, \
+         { "longitude", NULL, MAVLINK_TYPE_FLOAT, 0, 28, offsetof(mavlink_external_data_t, longitude) }, \
+         { "altitude", NULL, MAVLINK_TYPE_FLOAT, 0, 32, offsetof(mavlink_external_data_t, altitude) }, \
          } \
 }
 #endif
@@ -61,10 +70,13 @@ typedef struct __mavlink_external_data_t {
  * @param water_temperature Water temperature in celsius.
  * @param humidity Percentage of humidity in air.
  * @param battery_status Which battery is used. (1 or 2)
+ * @param latitude Latitude of the microprocessor when the data was received.
+ * @param longitude Longitude of the microprocessor when the data was received.
+ * @param altitude Altitude of the microprocessor when the data was received.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_external_data_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-						       float voltage, float current, float air_temperature, float water_temperature, float humidity, uint32_t battery_status)
+						       float voltage, float current, float air_temperature, float water_temperature, float humidity, uint32_t battery_status, float latitude, float longitude, float altitude)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 	char buf[MAVLINK_MSG_ID_EXTERNAL_DATA_LEN];
@@ -74,6 +86,9 @@ static inline uint16_t mavlink_msg_external_data_pack(uint8_t system_id, uint8_t
 	_mav_put_float(buf, 12, water_temperature);
 	_mav_put_float(buf, 16, humidity);
 	_mav_put_uint32_t(buf, 20, battery_status);
+	_mav_put_float(buf, 24, latitude);
+	_mav_put_float(buf, 28, longitude);
+	_mav_put_float(buf, 32, altitude);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN);
 #else
@@ -84,6 +99,9 @@ static inline uint16_t mavlink_msg_external_data_pack(uint8_t system_id, uint8_t
 	packet.water_temperature = water_temperature;
 	packet.humidity = humidity;
 	packet.battery_status = battery_status;
+	packet.latitude = latitude;
+	packet.longitude = longitude;
+	packet.altitude = altitude;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN);
 #endif
@@ -104,11 +122,14 @@ static inline uint16_t mavlink_msg_external_data_pack(uint8_t system_id, uint8_t
  * @param water_temperature Water temperature in celsius.
  * @param humidity Percentage of humidity in air.
  * @param battery_status Which battery is used. (1 or 2)
+ * @param latitude Latitude of the microprocessor when the data was received.
+ * @param longitude Longitude of the microprocessor when the data was received.
+ * @param altitude Altitude of the microprocessor when the data was received.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_external_data_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
 							   mavlink_message_t* msg,
-						           float voltage,float current,float air_temperature,float water_temperature,float humidity,uint32_t battery_status)
+						           float voltage,float current,float air_temperature,float water_temperature,float humidity,uint32_t battery_status,float latitude,float longitude,float altitude)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 	char buf[MAVLINK_MSG_ID_EXTERNAL_DATA_LEN];
@@ -118,6 +139,9 @@ static inline uint16_t mavlink_msg_external_data_pack_chan(uint8_t system_id, ui
 	_mav_put_float(buf, 12, water_temperature);
 	_mav_put_float(buf, 16, humidity);
 	_mav_put_uint32_t(buf, 20, battery_status);
+	_mav_put_float(buf, 24, latitude);
+	_mav_put_float(buf, 28, longitude);
+	_mav_put_float(buf, 32, altitude);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN);
 #else
@@ -128,6 +152,9 @@ static inline uint16_t mavlink_msg_external_data_pack_chan(uint8_t system_id, ui
 	packet.water_temperature = water_temperature;
 	packet.humidity = humidity;
 	packet.battery_status = battery_status;
+	packet.latitude = latitude;
+	packet.longitude = longitude;
+	packet.altitude = altitude;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN);
 #endif
@@ -146,7 +173,7 @@ static inline uint16_t mavlink_msg_external_data_pack_chan(uint8_t system_id, ui
  */
 static inline uint16_t mavlink_msg_external_data_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_external_data_t* external_data)
 {
-	return mavlink_msg_external_data_pack(system_id, component_id, msg, external_data->voltage, external_data->current, external_data->air_temperature, external_data->water_temperature, external_data->humidity, external_data->battery_status);
+	return mavlink_msg_external_data_pack(system_id, component_id, msg, external_data->voltage, external_data->current, external_data->air_temperature, external_data->water_temperature, external_data->humidity, external_data->battery_status, external_data->latitude, external_data->longitude, external_data->altitude);
 }
 
 /**
@@ -160,7 +187,7 @@ static inline uint16_t mavlink_msg_external_data_encode(uint8_t system_id, uint8
  */
 static inline uint16_t mavlink_msg_external_data_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_external_data_t* external_data)
 {
-	return mavlink_msg_external_data_pack_chan(system_id, component_id, chan, msg, external_data->voltage, external_data->current, external_data->air_temperature, external_data->water_temperature, external_data->humidity, external_data->battery_status);
+	return mavlink_msg_external_data_pack_chan(system_id, component_id, chan, msg, external_data->voltage, external_data->current, external_data->air_temperature, external_data->water_temperature, external_data->humidity, external_data->battery_status, external_data->latitude, external_data->longitude, external_data->altitude);
 }
 
 /**
@@ -173,10 +200,13 @@ static inline uint16_t mavlink_msg_external_data_encode_chan(uint8_t system_id, 
  * @param water_temperature Water temperature in celsius.
  * @param humidity Percentage of humidity in air.
  * @param battery_status Which battery is used. (1 or 2)
+ * @param latitude Latitude of the microprocessor when the data was received.
+ * @param longitude Longitude of the microprocessor when the data was received.
+ * @param altitude Altitude of the microprocessor when the data was received.
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_external_data_send(mavlink_channel_t chan, float voltage, float current, float air_temperature, float water_temperature, float humidity, uint32_t battery_status)
+static inline void mavlink_msg_external_data_send(mavlink_channel_t chan, float voltage, float current, float air_temperature, float water_temperature, float humidity, uint32_t battery_status, float latitude, float longitude, float altitude)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 	char buf[MAVLINK_MSG_ID_EXTERNAL_DATA_LEN];
@@ -186,6 +216,9 @@ static inline void mavlink_msg_external_data_send(mavlink_channel_t chan, float 
 	_mav_put_float(buf, 12, water_temperature);
 	_mav_put_float(buf, 16, humidity);
 	_mav_put_uint32_t(buf, 20, battery_status);
+	_mav_put_float(buf, 24, latitude);
+	_mav_put_float(buf, 28, longitude);
+	_mav_put_float(buf, 32, altitude);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, buf, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #else
@@ -196,6 +229,9 @@ static inline void mavlink_msg_external_data_send(mavlink_channel_t chan, float 
 	packet.water_temperature = water_temperature;
 	packet.humidity = humidity;
 	packet.battery_status = battery_status;
+	packet.latitude = latitude;
+	packet.longitude = longitude;
+	packet.altitude = altitude;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, (const char *)&packet, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #endif
@@ -209,7 +245,7 @@ static inline void mavlink_msg_external_data_send(mavlink_channel_t chan, float 
 static inline void mavlink_msg_external_data_send_struct(mavlink_channel_t chan, const mavlink_external_data_t* external_data)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_external_data_send(chan, external_data->voltage, external_data->current, external_data->air_temperature, external_data->water_temperature, external_data->humidity, external_data->battery_status);
+    mavlink_msg_external_data_send(chan, external_data->voltage, external_data->current, external_data->air_temperature, external_data->water_temperature, external_data->humidity, external_data->battery_status, external_data->latitude, external_data->longitude, external_data->altitude);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, (const char *)external_data, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #endif
@@ -223,7 +259,7 @@ static inline void mavlink_msg_external_data_send_struct(mavlink_channel_t chan,
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_external_data_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  float voltage, float current, float air_temperature, float water_temperature, float humidity, uint32_t battery_status)
+static inline void mavlink_msg_external_data_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  float voltage, float current, float air_temperature, float water_temperature, float humidity, uint32_t battery_status, float latitude, float longitude, float altitude)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
 	char *buf = (char *)msgbuf;
@@ -233,6 +269,9 @@ static inline void mavlink_msg_external_data_send_buf(mavlink_message_t *msgbuf,
 	_mav_put_float(buf, 12, water_temperature);
 	_mav_put_float(buf, 16, humidity);
 	_mav_put_uint32_t(buf, 20, battery_status);
+	_mav_put_float(buf, 24, latitude);
+	_mav_put_float(buf, 28, longitude);
+	_mav_put_float(buf, 32, altitude);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, buf, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #else
@@ -243,6 +282,9 @@ static inline void mavlink_msg_external_data_send_buf(mavlink_message_t *msgbuf,
 	packet->water_temperature = water_temperature;
 	packet->humidity = humidity;
 	packet->battery_status = battery_status;
+	packet->latitude = latitude;
+	packet->longitude = longitude;
+	packet->altitude = altitude;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_EXTERNAL_DATA, (const char *)packet, MAVLINK_MSG_ID_EXTERNAL_DATA_MIN_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN, MAVLINK_MSG_ID_EXTERNAL_DATA_CRC);
 #endif
@@ -315,6 +357,36 @@ static inline uint32_t mavlink_msg_external_data_get_battery_status(const mavlin
 }
 
 /**
+ * @brief Get field latitude from external_data message
+ *
+ * @return Latitude of the microprocessor when the data was received.
+ */
+static inline float mavlink_msg_external_data_get_latitude(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  24);
+}
+
+/**
+ * @brief Get field longitude from external_data message
+ *
+ * @return Longitude of the microprocessor when the data was received.
+ */
+static inline float mavlink_msg_external_data_get_longitude(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  28);
+}
+
+/**
+ * @brief Get field altitude from external_data message
+ *
+ * @return Altitude of the microprocessor when the data was received.
+ */
+static inline float mavlink_msg_external_data_get_altitude(const mavlink_message_t* msg)
+{
+	return _MAV_RETURN_float(msg,  32);
+}
+
+/**
  * @brief Decode a external_data message into a struct
  *
  * @param msg The message to decode
@@ -329,6 +401,9 @@ static inline void mavlink_msg_external_data_decode(const mavlink_message_t* msg
 	external_data->water_temperature = mavlink_msg_external_data_get_water_temperature(msg);
 	external_data->humidity = mavlink_msg_external_data_get_humidity(msg);
 	external_data->battery_status = mavlink_msg_external_data_get_battery_status(msg);
+	external_data->latitude = mavlink_msg_external_data_get_latitude(msg);
+	external_data->longitude = mavlink_msg_external_data_get_longitude(msg);
+	external_data->altitude = mavlink_msg_external_data_get_altitude(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_EXTERNAL_DATA_LEN? msg->len : MAVLINK_MSG_ID_EXTERNAL_DATA_LEN;
         memset(external_data, 0, MAVLINK_MSG_ID_EXTERNAL_DATA_LEN);
